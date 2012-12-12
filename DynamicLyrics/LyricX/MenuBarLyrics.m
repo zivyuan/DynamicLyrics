@@ -8,6 +8,7 @@
 
 #import "MenuBarLyrics.h"
 #import "Constants.h"
+#import "LyricsCleaner.h"
 
 @implementation MenuBarLyrics
 
@@ -112,7 +113,7 @@
 			forceUpdate = YES;
 		}
 	}else{
-		self.CurrentSongLyrics = lyric;
+		self.CurrentSongLyrics = [[LyricsCleaner instance] cleanLyrics:lyric];
 	}
 
 	[_queue cancelAllOperations];

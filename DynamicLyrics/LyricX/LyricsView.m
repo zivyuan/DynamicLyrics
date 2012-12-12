@@ -9,6 +9,7 @@
 #import "LyricsView.h"
 #import "Constants.h"
 #import "iTunes.h"
+#import "LyricsCleaner.h"
 
 @interface LyricsView ()
 
@@ -92,7 +93,7 @@ static CGColorRef CGColorCreateFromNSColor (CGColorSpaceRef colorSpace, NSColor 
 			forceUpdate = YES;
 		}
     }else{
-		self.currentLyrics = lyrics;
+		self.currentLyrics = [[LyricsCleaner instance] cleanLyrics:lyrics];
 	}
     
 	if ([userDefaults boolForKey:@Pref_Enable_Desktop_Lyrics] || forceUpdate) {
