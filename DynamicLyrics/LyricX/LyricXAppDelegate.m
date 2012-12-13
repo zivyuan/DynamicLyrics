@@ -117,8 +117,8 @@
     
     
      
-    NSString* documentsFolder = [NSHomeDirectory() stringByAppendingPathComponent:@"Desktop"];
-    NSString* fileName = [NSString stringWithFormat:@"%@ - %@.tiff",Controller.iTunesCurrentTrack.name,Controller.iTunesCurrentTrack.artist];
+    NSString* documentsFolder = [NSHomeDirectory() stringByAppendingPathComponent:@"Desktop/"];
+    NSString* fileName = [NSString stringWithFormat:@"%@ - %@.png", Controller.iTunesCurrentTrack.name, Controller.iTunesCurrentTrack.artist];
     
     [saveDlg setNameFieldStringValue:fileName];
 
@@ -130,12 +130,12 @@
     iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
 
 
-    NSImage *image = [[NSImage alloc] initWithData:[[[[iTunes currentTrack] artworks] objectAtIndex:0] rawData]];
+    NSImage *image = [[[NSImage alloc] initWithData:[[[[iTunes currentTrack] artworks] objectAtIndex:0] rawData]] retain];
     
     NSData *imageData = [image TIFFRepresentation];
     NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
     NSDictionary *imageProps = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
-    imageData = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+    imageData = [imageRep representationUsingType:NSPNGFileType properties:imageProps];
     [imageData writeToFile:[[saveDlg URL] path] atomically:NO];     
     [image release];
 }
