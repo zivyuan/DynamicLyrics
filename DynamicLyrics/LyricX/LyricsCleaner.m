@@ -27,7 +27,7 @@
 
 -(NSString *)cleanLyrics:(NSString *)lyrics
 {
-	NSRange rng = [lyrics rangeOfRegex:@"(---|[qQ]{2,}|music|MUSIC|Music)"];
+	NSRange rng = [lyrics rangeOfRegex:@"(---|[qQ]{2,}|music|MUSIC|Music|-=|={2,})"];
 	if (rng.length > 0) {
 		return @"";
 	}
